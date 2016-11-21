@@ -26,7 +26,7 @@ public class ExecuteAroundTest {
     }
 
     @Test
-    public void processFileMEthodReturnProperResponse() throws Exception {
+    public void processFileMethodReturnOneLine() throws Exception {
 
         String result = executeAround.processFile((BufferedReader br) -> {
             try {
@@ -38,6 +38,22 @@ public class ExecuteAroundTest {
 
         assertNotNull(result);
         assertEquals("a text file", result);
+
+    }
+
+    @Test
+    public void processFileMethodReturnTwoLines() throws Exception {
+
+        String result = executeAround.processFile((BufferedReader br) -> {
+            try {
+                return br.readLine() + br.readLine();
+            } catch (IOException e) {
+                return null;
+            }
+        });
+
+        assertNotNull(result);
+        assertEquals("a text filecontaing some rows", result);
 
     }
 
